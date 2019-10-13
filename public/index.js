@@ -62,26 +62,26 @@ window.onload = function () {
   const autor = window.document.getElementById("autor");
   autor.innerHTML += `- ${frase.autor !== '' ? frase.autor : 'Anonimo'}`;
   const unsplash = document.querySelector(".unsplash-credit");
-  // getLandscape().then((landscape) => {
-  //   let color = "black"
-  //   let shadow = "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
-  //   if (isDark(landscape.color)) {
-  //     color = "white"
-  //     shadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
-  //   }
-  //   if (landscape.location.title) {
-  //     const location = window.document.getElementById("location");
-  //     location.style.textShadow = shadow;
-  //     location.style.color = color;
-  //     location.innerHTML += `<i class="material-icons icon">my_location</i> ${landscape.location.title}`
-  //   }
+  getLandscape().then((landscape) => {
+    let color = "black"
+    let shadow = "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
+    if (isDark(landscape.color)) {
+      color = "white"
+      shadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+    }
+    if (landscape.location.title) {
+      const location = window.document.getElementById("location");
+      location.style.textShadow = shadow;
+      location.style.color = color;
+      location.innerHTML += `<i class="material-icons icon">my_location</i> ${landscape.location.title}`
+    }
 
-  //   unsplash.setAttribute("href", landscape.unsplash);
-  //   unsplash.innerHTML += `Foto por ${landscape.autor}`;
-  //   frame.style.textShadow = shadow;
-  //   frame.style.color = color;
-  //   autor.style.textShadow = shadow;
-  //   autor.style.color = color;
-  //   window.document.body.style.backgroundImage = `url('${landscape.photoUrl}')`;
-  // })
+    unsplash.setAttribute("href", landscape.unsplash);
+    unsplash.innerHTML += `Foto por ${landscape.autor}`;
+    frame.style.textShadow = shadow;
+    frame.style.color = color;
+    autor.style.textShadow = shadow;
+    autor.style.color = color;
+    window.document.body.style.backgroundImage = `url('${landscape.photoUrl}')`;
+  })
 }
