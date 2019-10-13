@@ -42,7 +42,7 @@ async function isSubscribedToPushNotification(swRegistration) {
 }
 
 async function saveSubscription(subscription) {
-  const SERVER_URL = "http://localhost:8080/notifications/subscribe";
+  const SERVER_URL = "https://frases-pwa.herokuapp.com/notifications/subscribe";
   const response = await fetch(SERVER_URL, {
     method: "post",
     headers: {"Content-Type": "application/json"},
