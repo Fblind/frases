@@ -1,0 +1,33 @@
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:latest
+
+stages:
+  # - lint
+  # - test
+  - deploy
+
+# lint:
+#   stage: lint
+#   script:
+#     - npm i npm@latest -g
+#     - npm i
+#     - npm run lint
+
+# test:
+#   stage: test
+#   script:
+#     - npm i npm@latest -g
+#     - npm i
+#     - npm test
+#   coverage:
+#     '/Statements.*?(\d+(?:\.\d+)?)%/'
+
+deploy:
+  image: ruby:latest
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_CI_API_KEY
+  only:
+    - master

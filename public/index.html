@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Frases</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <style>
+      /* margin entre los containers */
+      .flex-container-column {
+        display: flex; /* or inline-flex */
+        flex-direction: column;
+      }
+      .flex-container-row {
+        display: flex; /* or inline-flex */
+      }
+      .flex-item {
+        color: black;
+      }
+
+      .first-item {
+        flex-grow: 1;
+      }
+
+      html, body {
+        height: 100%;
+        font-family: 'Merriweather', serif;
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+        overflow: hidden;
+      }
+      .content {
+        flex: 1 0 auto;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer {
+        flex-shrink: 0;
+      }
+
+      .icon {
+        position: relative;
+        top: 5px;
+      }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="content">
+      <nav class="navigation">
+        <button aria-expanded="false" aria-controls="menu">
+          <!-- TODO: que cambie a una X-->
+          <svg id="i-menu" aria-label="Menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+          </svg>
+         </button>
+
+        <ul id="menu" hidden>
+          <li><a href="https://github.com/Fblind">Creado por Facundo Soria Guerreo</a></li>
+          <li><a target="_blank" class="item unsplash-credit" href="#"></a></li>
+          <li><a class="subscribe">¿Queres recibir frases todos los dias? Hace click acá</a></li>
+        </ul>
+      </nav>
+    </div>
+    <footer class="footer">
+      <div class="flex-container-row">
+        <div class="flex-item first-item">
+          <h1 id="frase"></h1>
+          <h3 id="autor"></h3>
+        </div>
+        <div class="flex-item">
+          <h4 id="location">
+          </h4>
+        </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="index.js" defer></script>
+    <script type="text/javascript" src="menu.js" defer></script>
+    <script type="text/javascript" src="notifications.js" defer></script>
+    <script type="text/javascript" src="sw.js" defer></script>
+  </body>
+</html>
