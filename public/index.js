@@ -12,11 +12,19 @@ function getFrase() {
     {frase: "Tenemos que hacer lo mejor que somos capaces de hacer. Esta es nuestra sagrada responsabilidad como humanos", autor: ""},
     {frase: "Todo lo que siempre has querido está al otro lado del miedo", autor: ""},
     {frase: "Lo importante no es que hagas más, sino que hagas mejor", autor: "Valeria Pera"},
+    {frase: "El mejor momento para empezar fue el año pasado. El segundo mejor momento es ahora.", author: "Seth Godin"}
   ]
   return frases[getRandomInt(0, frases.length - 1)];
 }
 
 function getLandscape() {
+  // return Promise.resolve({
+  //   photoUrl: "https://images.unsplash.com/uploads/141202612010220122e66/d8d64202?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjk0ODIxfQ",
+  //   location: {title: "Santiago del Estero, Argentina"},
+  //   color: "#000",
+  //   autor: "Facundo",
+  //   unsplash: "http://blabla.com"
+  // })
   return fetch("https://api.unsplash.com/photos/random?query=travel-landscape&orientation=landscape", {
     method:"GET",
     headers: {
@@ -65,7 +73,7 @@ window.onload = function () {
   getLandscape().then((landscape) => {
     let color = "black"
     let shadow = "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
-    if (isDark(landscape.color)) {
+    if (isDark(hexToRgb(landscape.color))) {
       color = "white"
       shadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
     }

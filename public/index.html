@@ -4,38 +4,34 @@
     <meta charset="UTF-8">
     <title>Frases</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link href="styles.css" rel="stylesheet"> -->
     <style>
-      /* margin entre los containers */
-      .flex-container-column {
-        display: flex; /* or inline-flex */
-        flex-direction: column;
-      }
-
-      .flex-item {
-        color: black;
-      }
-
-      html, body {
+      @import url(https://use.fontawesome.com/releases/v5.0.6/css/all.css);
+      html {
         height: 100%;
-        font-family: 'Merriweather', serif;
-        -webkit-background-size: cover;
+        overflow: hidden;
+      }
+
+      body {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center top;
-        overflow: hidden;
-      }
-      .content {
-        flex: 1 0 auto;
-      }
-      body {
-        display: flex;
-        flex-direction: column;
+        height: 100%;
+        font-family: monospace, serif;
       }
 
-      .footer {
-        flex-shrink: 0;
+      main {
+        height: 70%;
+      }
+
+      footer {
+        box-sizing: border-box;
+        position: fixed;
+        bottom: 10%;
+        padding: 2em
       }
 
       .icon {
@@ -43,39 +39,197 @@
         top: 5px;
       }
     </style>
-    <link href="styles.css" rel="stylesheet">
+    <style>
+
+    nav {
+      /*background: #e5e5e5;*/
+      background: transparent;
+      color: #1d1f20;
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 9999;
+    }
+
+    /*** INPUT ***/
+    nav input {
+      opacity: 0;
+      position: absolute;
+      z-index: -1;
+    }
+
+    /*** LABEL ***/
+    nav label {
+      cursor: pointer;
+      display: block;
+      font: 2em/1 'Oswald', sans-serif;
+      padding: 0.5em;
+    }
+
+    /* Hamburger Icon */
+    #menu-icon,
+    #menu-icon:before,
+    #menu-icon:after {
+      background: #1d1f20;
+      border-radius: 0.05em;
+      height: 0.2em;
+      transition: all 0.2s ease-in-out;
+      width: 100%;
+    }
+
+    #menu-icon {
+      display: inline-block;
+      margin: 0.4em 0;
+      max-width: 1em;
+      position: relative;
+    }
+
+    nav label #menu-icon {
+      float: right;
+    }
+
+    #menu-icon:before,
+    #menu-icon:after {
+      content: '';
+      left: 0;
+      position: absolute;
+    }
+
+    #menu-icon:before {
+      top: -0.4em;
+    }
+
+    #menu-icon:after {
+      bottom: -0.4em;
+    }
+
+    /* Close Icon */
+    nav input[type=checkbox]:checked + label #menu-icon {
+      background: transparent;
+    }
+
+    nav input[type=checkbox]:checked + label #menu-icon:before {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    nav input[type=checkbox]:checked + label #menu-icon:after {
+      bottom: 0;
+      transform: rotate(45deg);
+    }
+
+    /*** MENU ***/
+    /* Overlay */
+    nav input:checked ~ #overlay {
+      background: #e5e5e5;
+      bottom: 0;
+      left: 0;
+      height: 100vh;
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 100vw;
+      z-index: -1;
+      transition: 0.2s 0.2s background ease-in-out;
+    }
+
+    /* List */
+    nav ul {
+      font-size: 1.5em;
+      list-style: none;
+      margin: 0;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+      text-align: center;
+    }
+
+    nav input:checked ~ ul {
+      margin: 1em;
+      max-height: inherit;
+      opacity: 1;
+      transition: 1s ease-in-out opacity;
+    }
+
+    nav ul div > li {
+      margin: 0.5em 0;
+      grid-column: 2 / 6;
+    }
+
+    nav ul a {
+      color: #1d1f20!important;
+      text-decoration: none;
+    }
+
+    nav ul a:hover {
+      text-decoration: underline;
+    }
+
+    nav ul div {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: auto;
+      align-content: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    </style>
+
+    <style>
+      @media only screen and (min-width: 0px) and (max-width: 768px) {
+        /* For mobile phones: */
+        html {
+          font-size: 1em;
+        }
+        nav label, nav input {
+          font-size: 2em;
+        }
+
+        footer {
+          padding: 2em;
+          bottom: 0;
+        }
+      }
+
+      @media only screen and (min-width: 0px) and (max-width: 425px) {
+        nav ul div > li {
+          margin: 0.5em 0;
+          grid-column: 1 / 7;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="content">
-      <nav class="navigation">
-        <button aria-expanded="false" aria-controls="menu">
-          <!-- TODO: que cambie a una X-->
-          <svg id="i-menu" aria-label="Menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/>
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-          </svg>
-         </button>
-
-        <ul id="menu" hidden>
+    <nav>
+      <input id="responsive-menu" type="checkbox">
+      <label for="responsive-menu"><span id="menu-icon"></span></label>
+      <div id="overlay"></div>
+      <ul id="menu">
+        <div>
           <li><a href="https://github.com/Fblind">Creado por Facundo Soria Guerreo</a></li>
           <li><a target="_blank" class="item unsplash-credit" href="#"></a></li>
           <li><a class="subscribe">¿Queres recibir frases todos los dias? Hace click acá</a></li>
-        </ul>
-      </nav>
-    </div>
-    <footer class="footer">
-      <div class="flex-container-row">
-        <div class="flex-item first-item">
-          <h1 id="frase"></h1>
-          <h3 id="autor"></h3>
         </div>
-        <div class="flex-item second-item">
+      </ul>
+    </nav>
+    <main class="content">
+    </main>
+    <footer>
+      <div class="">
+        <div class="location-container">
           <h4 id="location">
           </h4>
+        </div>
+        <div class="quote-container">
+          <h1 id="frase"></h1>
+          <h3 id="autor"></h3>
         </div>
       </div>
     </footer>
     <script type="text/javascript" src="index.js" defer></script>
-    <script type="text/javascript" src="menu.js" defer></script>
+    <!-- <script type="text/javascript" src="menu.js" defer></script> -->
     <script type="text/javascript" src="notifications.js" defer></script>
     <script type="text/javascript" src="sw.js" defer></script>
   </body>

@@ -3,5 +3,9 @@ TODOs:
 - Agregar el subscribe en la pagina - done
 - Add imagenes de logo - done
 - Add manifest para pwa - done
-- Crear mongo en cloud
-- Deploy a heroku
+- Crear mongo en cloud - done
+- Deploy a heroku - done
+- layout mobile - done
+
+- cron url should be async, return response as posible as it can
+- ordenar public folder
