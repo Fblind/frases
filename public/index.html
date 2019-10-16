@@ -200,11 +200,28 @@
         }
       }
     </style>
+    <style>
+      #responsive-refresh {
+        float: right;
+        right: 0;
+        position: absolute;
+        width: 43px;
+        height: 64px;
+        margin-top: 10px;
+      }
+
+      .refresh-icon {
+        font-size: 1.7em;
+        max-width: 32px;
+        width: 64px;
+      }
+    </style>
   </head>
   <body>
     <nav>
       <input id="responsive-menu" type="checkbox">
       <label for="responsive-menu"><span id="menu-icon"></span></label>
+      <label id="responsive-refresh"><i class="material-icons refresh-icon" onclick="window.location.reload()">refresh</i></label>
       <div id="overlay"></div>
       <ul id="menu">
         <div>

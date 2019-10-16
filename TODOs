@@ -6,6 +6,15 @@ TODOs:
 - Crear mongo en cloud - done
 - Deploy a heroku - done
 - layout mobile - done
+- cron url should be async, return response as posible as it can - done
+- reload page (location.reload()) - done
 
-- cron url should be async, return response as posible as it can
+- armar bien la notificacion
+- armar logo posta
+- lenguajes
 - ordenar public folder
+- definir caso de uso de la app
+  - Caso 1: El usuario no esta subscripto
+  - Caso 2: El usuario no esta subscripto y se quiere subscribir
+  - Caso 3: El usuario esta subscripto
+  - Caso 4: El usuario esta subscripto y se quiere subscribir
