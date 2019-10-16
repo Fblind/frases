@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(serveStatic(path.join(__dirname, "public")));
 
 app.post("/notifications/subscribe", require("./app/modules/notifications/handlers/postSubscribe")());
-app.post("/notifications/send", require("./app/modules/notifications/handlers/postSend")());
+app.post("/notifications/send/all", require("./app/modules/notifications/handlers/postSend")());
 
 const port = process.env.PORT || config.port || 8080;
 // DB registration

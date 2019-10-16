@@ -5,6 +5,8 @@ function postSend() {
   return async (req, res) => {
     try {
       const records = await PushSchema.find({});
+      // act like a worker
+      res.json({ok: "ok"});
       for (record of records) {
         const options = {TTL: 86400};
         const subscription = {
@@ -19,9 +21,12 @@ function postSend() {
           body: "Comenzá el día de la mejor manera",
           icon: "/images/quotation.jpg"
         });
-        await webPush.sendNotification(subscription, payload, options);
+        try {
+          await webPush.sendNotification(subscription, payload, options);
+        } catch (err) {
+          console.error("Error sending notification", err);
+        }
       }
-      return res.json({ok: "ok"});
     } catch (err) {
       return res.status(500).json({err});
     }
