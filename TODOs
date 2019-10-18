@@ -9,6 +9,8 @@ TODOs:
 - cron url should be async, return response as posible as it can - done
 - reload page (location.reload()) - done
 
+
+- redireccion del pushclick notification no termina de cargar en desktop
 - armar bien la notificacion
 - armar logo posta
 - lenguajes
