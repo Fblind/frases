@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+  font-size: calc(1em + 1vw)
+}
+
+.bg-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  position: relative;
+  z-index: -1;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px -5px 5px 5px rgba(0,0,0,0.6);
+}
+
+.quote-container {
+  padding: 2rem;
+  font-size: 0.8rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+.icon {
+  position: relative;
+  top: 5px;
+}
+
+.subscribe {
+  cursor: pointer;
+}

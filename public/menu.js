@@ -1,15 +1,20 @@
-const toggleMenu = document.querySelector(".navigation button");
-const menu = document.querySelector(".navigation ul");
-const footer = document.querySelector(".footer");
+const menu = document.querySelector(".menu-list");
+const main = document.querySelector(".main");
+const menucito = document.querySelector("#nav-icon")
 
-toggleMenu.addEventListener("click", function () {
-  const open = JSON.parse(toggleMenu.getAttribute("aria-expanded"));
-  toggleMenu.setAttribute("aria-expanded", !open);
-  menu.hidden = !menu.hidden;
-  footer.hidden = !footer.hidden;
-  if (menu.hidden) {
-    menu.style.display = "none";
+menucito.addEventListener('click', () => {
+  const open = menucito.classList.contains('open')
+  if (!open) {
+    menucito.classList.add('open')
+    main.classList.add('menu-transition-hide')
+    main.classList.remove('menu-transition')
+    menu.classList.add('menu-transition')
+    menu.classList.remove('menu-transition-hide')
   } else {
-    menu.style.display = "flex";
+    menucito.classList.remove('open')
+    main.classList.remove('menu-transition-hide')
+    main.classList.add('menu-transition')
+    menu.classList.remove('menu-transition')
+    menu.classList.add('menu-transition-hide')
   }
-});
+})

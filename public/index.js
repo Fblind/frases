@@ -41,6 +41,7 @@ function getFrase() {
     {frase: "El momento más aterrador es siempre justo antes de empezar.", autor: "Stephen King"},
     {frase: "Sé amoroso contigo mismo, entonces también podrás amar a los demás.", autor: "Osho"},
     {frase: "Cuando expresamos nuestra gratitud, nunca debemos olvidar que la mayor apreciación no es decir las palabras; sino vivir de acuerdo con ellas.", autor: "John F. Kennedy"},
+    {frase: "Por salud mental, no supongas", autor: ""},
   ]
   return frases[getRandomInt(0, frases.length - 1)];
 }
@@ -93,31 +94,19 @@ function isDark(rgb) {
 
 window.onload = function () {
   const frase = getFrase();
-  const frame = window.document.getElementById("frase");
-  frame.innerHTML += `"${frase.frase}"`;
-  const autor = window.document.getElementById("autor");
-  autor.innerHTML += `- ${frase.autor !== '' ? frase.autor : 'Anonimo'}`;
-  const unsplash = document.querySelector(".unsplash-credit");
   getLandscape().then((landscape) => {
-    let color = "black"
-    let shadow = "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
-    if (isDark(hexToRgb(landscape.color))) {
-      color = "white"
-      shadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
-    }
+    const frame = window.document.getElementById("frase");
+    frame.innerHTML += `"${frase.frase}"`;
+    const autor = window.document.getElementById("autor");
+    autor.innerHTML += `- ${frase.autor !== '' ? frase.autor : 'Anonimo'}`;
+    const unsplash = document.querySelector(".unsplash-credit");
     if (landscape.location.title) {
       const location = window.document.getElementById("location");
-      location.style.textShadow = shadow;
-      location.style.color = color;
       location.innerHTML += `<i class="material-icons icon">my_location</i> ${landscape.location.title}`
     }
 
     unsplash.setAttribute("href", landscape.unsplash);
     unsplash.innerHTML += `Foto por ${landscape.autor}`;
-    frame.style.textShadow = shadow;
-    frame.style.color = color;
-    autor.style.textShadow = shadow;
-    autor.style.color = color;
     window.document.body.style.backgroundImage = `url('${landscape.photoUrl}')`;
   })
 }
