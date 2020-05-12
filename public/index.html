@@ -7,6 +7,7 @@
   <title>Frases inspiradoras todos los días</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/switch.css">
 </head>
 <body class="bg-image">
   <header class="header">
@@ -20,11 +21,20 @@
     </nav>
   </header>
   <section class="menu-list">
-    <ul>
-      <li><a href="https://fblind.github.io/about/">Creado por Facundo Soria Guerrero</a></li>
-      <li><a target="_blank" class="item unsplash-credit" href="#"></a></li>
-      <li><a class="subscribe">¿Queres recibir frases todos los dias? Hace click acá</a></li>
-    </ul>
+    <div class="up">
+      <img class="up-img" src="./images/me.png" />
+      <div class="mb-1"><h3>👨‍💻 <a href="https://fblind.github.io/about/">Facundo Soria Guerrero</a></h3></div>
+      <div class="mb-0"><h5>📸 <a target="_blank" class="item unsplash-credit" href="#"></a></h5></div>
+    </div>
+    <div class="bottom" style="display: none">
+      <div class="bottom-notifications">
+        <h4>Notificaciones diarias</h4>
+        <label class="switch">
+          <input class="swtch-checkbox" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
   </section>
 
   <main class="main">

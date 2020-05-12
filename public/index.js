@@ -106,7 +106,7 @@ window.onload = function () {
     }
 
     unsplash.setAttribute("href", landscape.unsplash);
-    unsplash.innerHTML += `Foto por ${landscape.autor}`;
+    unsplash.innerHTML += landscape.autor;
     window.document.body.style.backgroundImage = `url('${landscape.photoUrl}')`;
   })
 }
