@@ -5,7 +5,7 @@ function postSubscribe(subscribe) {
 
     try {
       await subscribe(endpoint)
-      return res.status(200).send('subscribe');
+      return res.json({status: 'subscribe'});
     } catch (err) {
       return res.status(500).send('subscription not possible');
     }

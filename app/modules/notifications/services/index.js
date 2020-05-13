@@ -9,4 +9,5 @@ const sendDailyNotification = require('./sendDailyNotification')({notificationSe
 module.exports = {
   subscribe: require('./subscribe')({pushCollection, sendWelcomeNotification}),
   sendDailyNotifications: require('./sendDailyNotifications')({pushCollection, sendDailyNotification}),
+  unsubscribe: require('./unsubscribe')({pushCollection})
 }

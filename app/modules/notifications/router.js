@@ -4,6 +4,9 @@ function initializeRouter (router, useCases) {
 
   const postSend = require("./handlers/postSend")
   router.post('/send/all', postSend(useCases.sendDailyNotifications))
+
+  const postUnsubscribe = require("./handlers/postUnsubscribe")
+  router.post('/unsubscribe', postUnsubscribe(useCases.unsubscribe))
   return router
 }
 

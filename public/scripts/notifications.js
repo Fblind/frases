@@ -1,6 +1,8 @@
 const notifications = (function (_window, _navigator) {
   let _serviceWorker = null
   let _subscription = null
+  // const SERVER_URL = "http://localhost:8080"
+  const SERVER_URL = "https://frases-pwa.herokuapp.com";
 
   function _getNotificationSwitch (_document) {
     return _document.querySelector('.switch-notification-checkbox');
@@ -54,16 +56,30 @@ const notifications = (function (_window, _navigator) {
   }
 
   async function _saveSubscription(subscription) {
-    // const SERVER_URL = "https://frases-pwa.herokuapp.com/notifications/subscribe";
-    const SERVER_URL = "http://localhost:8080/notifications/subscribe"
-    const response = await fetch(SERVER_URL, {
+    const response = await fetch(SERVER_URL + '/notifications/subscribe', {
       method: "post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(subscription)
     });
-    return response.json();
+    const createdSubscription = await response.json();
+    return createdSubscription;
   };
 
+  async function _removeSubscription(subscription) {
+    const response = await fetch(SERVER_URL + '/notifications/unsubscribe', {
+      method: "post",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({endpoint: subscription.endpoint})
+    });
+    const unsubscription = await response.json();
+    return unsubscription;
+  }
+
+  async function _unsubscribeUser() {
+    await _removeSubscription(_getSubscription());
+    await _getSubscription().unsubscribe();
+    _setSubscription(null);
+  }
 
   function _subscribeUser(_window) {
     function urlB64ToUint8Array(base64String) {
@@ -86,6 +102,7 @@ const notifications = (function (_window, _navigator) {
       if (permission === "granted") {
         const applicationServerKey = urlB64ToUint8Array("BGruMlB_05o4OARoRmBfYOjkixFyzXGDdCp3PBCpq3fl22pCnOI0V1uFUDt2b8YKiRP6siFwOEnzV3wOZIkeIfU");
         const subscription = await _getServiceWorker().pushManager.subscribe({userVisibleOnly: true, applicationServerKey})
+        _setSubscription(subscription)
         await _saveSubscription(subscription);
       }
     }
@@ -95,16 +112,17 @@ const notifications = (function (_window, _navigator) {
     return () => {
       const subscribeUser = _subscribeUser(_window)
       const notificationSwitch = _getNotificationSwitch(_document)
-      notificationSwitch.addEventListener('change', async function () {
+      notificationSwitch.addEventListener('change', function () {
         if (this.checked && !_getSubscription()) {
-          console.log("isChecked")
-          await subscribeUser()
+          console.log("subscribe user");
+          return subscribeUser()
+            .catch(console.error)
         } else {
-          console.log("isUnchecked")
-          // _unsubscribeUser()
+          console.log("unsubscribe user");
+          return _unsubscribeUser()
+            .catch(console.error)
         }
-
-      })
+      });
     }
   }
 
