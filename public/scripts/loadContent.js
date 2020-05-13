@@ -1,8 +1,57 @@
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+const addPageInformation = function (document, frase, landscape) {
+  function addQuote (_document, frase, landscape) {
+    const frame = _document.getElementById('frase')
+    const autor = _document.getElementById('autor')
+
+    frame.innerHTML += `"${frase.frase}"`
+    autor.innerHTML += `- ${frase.autor !== '' ? frase.autor : 'Anonimo'}`
+    if (landscape.location.title) {
+      const location = _document.getElementById('location')
+      location.innerHTML += `<i class="material-icons icon">my_location</i> ${landscape.location.title}`
+    }
+  }
+
+  function addMenuContent (_document, landscape) {
+    const unsplash = _document.querySelector('.unsplash-credit')
+    unsplash.setAttribute("href", landscape.unsplash);
+    unsplash.innerHTML += landscape.autor;
+  }
+
+  function ready (_document, frase, landscape) {
+    _document.body.style.backgroundImage = `url('${landscape.photoUrl}')`
+    addQuote(_document, frase, landscape)
+    addMenuContent(_document, landscape)
+  }
+
+  ready(document, frase, landscape)
+}
+
+function getLandscape() {
+  return fetch("https://api.unsplash.com/photos/random?query=travel-landscape&orientation=landscape", {
+    method:"GET",
+    headers: {
+      "Accept-Version": "v1",
+      "Authorization": "Client-ID 21e3689f60a6b996414262713bbb790f8028c3ab6531a580d800c8d1c1a859dc"
+    }
+  }).then(response => {
+    return response.json();
+  }).then(jsonResponse => {
+    const photo = jsonResponse;
+    return {
+      id: photo.id,
+      photoUrl: photo.urls.regular,
+      location: photo.location,
+      color: photo.color,
+      autor: photo.user.name,
+      unsplash: photo.links.html,
+    }
+  })
 }
 
 function getFrase() {
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
   const frases = [
     {frase: "El secreto de salir adelante es comenzar.", autor: ""},
     {frase: "El exito es ir de fracaso en fracaso sin perder el entuasiasmo.", autor: ""},
@@ -46,67 +95,7 @@ function getFrase() {
   return frases[getRandomInt(0, frases.length - 1)];
 }
 
-function getLandscape() {
-  // return Promise.resolve({
-  //   photoUrl: "https://images.unsplash.com/uploads/141202612010220122e66/d8d64202?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjk0ODIxfQ",
-  //   location: {title: "Santiago del Estero, Argentina"},
-  //   color: "#000",
-  //   autor: "Facundo",
-  //   unsplash: "http://blabla.com"
-  // })
-  return fetch("https://api.unsplash.com/photos/random?query=travel-landscape&orientation=landscape", {
-    method:"GET",
-    headers: {
-      "Accept-Version": "v1",
-      "Authorization": "Client-ID 21e3689f60a6b996414262713bbb790f8028c3ab6531a580d800c8d1c1a859dc"
-    }
-  }).then(response => {
-    return response.json();
-  }).then(jsonResponse => {
-    const photo = jsonResponse;
-    return {
-      id: photo.id,
-      photoUrl: photo.urls.regular,
-      location: photo.location,
-      color: photo.color,
-      autor: photo.user.name,
-      unsplash: photo.links.html,
-    }
+Promise.all([getFrase(), getLandscape()])
+  .then(([frase, landscape]) => {
+    addPageInformation(document, frase, landscape)
   })
-}
-
-function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-}
-
-function getBrightness(rgb) {
-  return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-}
-
-function isDark(rgb) {
-  return getBrightness(rgb) < 128;
-}
-
-window.onload = function () {
-  const frase = getFrase();
-  getLandscape().then((landscape) => {
-    const frame = window.document.getElementById("frase");
-    frame.innerHTML += `"${frase.frase}"`;
-    const autor = window.document.getElementById("autor");
-    autor.innerHTML += `- ${frase.autor !== '' ? frase.autor : 'Anonimo'}`;
-    const unsplash = document.querySelector(".unsplash-credit");
-    if (landscape.location.title) {
-      const location = window.document.getElementById("location");
-      location.innerHTML += `<i class="material-icons icon">my_location</i> ${landscape.location.title}`
-    }
-
-    unsplash.setAttribute("href", landscape.unsplash);
-    unsplash.innerHTML += landscape.autor;
-    window.document.body.style.backgroundImage = `url('${landscape.photoUrl}')`;
-  })
-}
