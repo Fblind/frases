@@ -54,8 +54,8 @@ const notifications = (function (_window, _navigator) {
   }
 
   async function _saveSubscription(subscription) {
-    const SERVER_URL = "https://frases-pwa.herokuapp.com/notifications/subscribe";
-    // const SERVER_URL = "http://localhost:8080/notifications/subscribe"
+    // const SERVER_URL = "https://frases-pwa.herokuapp.com/notifications/subscribe";
+    const SERVER_URL = "http://localhost:8080/notifications/subscribe"
     const response = await fetch(SERVER_URL, {
       method: "post",
       headers: {"Content-Type": "application/json"},
