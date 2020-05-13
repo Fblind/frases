@@ -23,7 +23,6 @@ const initializeNotificationRoutes = require('./app/modules/notifications/router
 const notificationUseCases = require('./app/modules/notifications/services')
 app.use('/notifications', initializeNotificationRoutes(router, notificationUseCases))
 
-app.post("/notifications/send/all", require("./app/modules/notifications/handlers/postSend")());
 
 const port = process.env.PORT || config.port || 8080;
 // DB registration

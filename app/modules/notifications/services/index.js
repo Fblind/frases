@@ -4,6 +4,9 @@ const sendWelcomeNotification = require('./sendWelcomeNotification')({notificati
 
 const pushCollection = require('../../../schemas/pushSchema')
 
+const sendDailyNotification = require('./sendDailyNotification')({notificationService, logger, pushCollection})
+
 module.exports = {
-  subscribe: require('./subscribe')({pushCollection, sendWelcomeNotification})
+  subscribe: require('./subscribe')({pushCollection, sendWelcomeNotification}),
+  sendDailyNotifications: require('./sendDailyNotifications')({pushCollection, sendDailyNotification}),
 }
