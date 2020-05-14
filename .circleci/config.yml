@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: ruby:latest
     steps:
+      - checkout
       - run: gem install dpl
       - run: dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_CI_API_KEY
 
