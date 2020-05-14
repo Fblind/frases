@@ -1,8 +1,6 @@
 const notifications = (function (_window, _navigator) {
   let _serviceWorker = null
   let _subscription = null
-  // const SERVER_URL = "http://localhost:8080"
-  const SERVER_URL = "https://frases-pwa.herokuapp.com";
 
   function _getNotificationSwitch (_document) {
     return _document.querySelector('.switch-notification-checkbox');
@@ -56,7 +54,7 @@ const notifications = (function (_window, _navigator) {
   }
 
   async function _saveSubscription(subscription) {
-    const response = await fetch(SERVER_URL + '/notifications/subscribe', {
+    const response = await fetch('/notifications/subscribe', {
       method: "post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(subscription)
@@ -66,7 +64,7 @@ const notifications = (function (_window, _navigator) {
   };
 
   async function _removeSubscription(subscription) {
-    const response = await fetch(SERVER_URL + '/notifications/unsubscribe', {
+    const response = await fetch('/notifications/unsubscribe', {
       method: "post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({endpoint: subscription.endpoint})

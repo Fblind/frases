@@ -5,3 +5,5 @@ node_modules
 coverage
 
 frases-mongo-db
+
+VAPID

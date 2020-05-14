@@ -5,11 +5,7 @@ const webPush = require("web-push");
 const path = require("path");
 const app = express();
 
-webPush.setVapidDetails(
-  'mailto:fblind@gmail.com',
-  "BGruMlB_05o4OARoRmBfYOjkixFyzXGDdCp3PBCpq3fl22pCnOI0V1uFUDt2b8YKiRP6siFwOEnzV3wOZIkeIfU",
-  "D8Ge2zSEOF71GGh4aJFiDVof1P1HloXxUUnKWKm1X3A"
-);
+webPush.setVapidDetails('mailto:fblind@gmail.com', config.vapid.public, config.vapid.private);
 
 // Common middlewares
 const bodyParser = require("body-parser");

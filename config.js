@@ -4,4 +4,8 @@ module.exports = {
   : "mongodb://localhost:27017",
   dbName: process.env.NODE_ENV === "test" ? "frases-test" : "frases",
   dbDebug: true,
+  vapid: {
+    public: process.env.VAPID_PUBLIC,
+    private: process.env.VAPID_PRIVATE,
+  }
 }
