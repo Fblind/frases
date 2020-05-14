@@ -6,3 +6,8 @@ jobs:
     steps:
       - run: gem install dpl
       - run: dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_CI_API_KEY
+
+workflows:
+  deploy:
+    jobs:
+      - deploy
