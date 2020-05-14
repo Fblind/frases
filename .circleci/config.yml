@@ -1,0 +1,8 @@
+version: 2.1
+jobs:
+  deploy:
+    docker:
+      - image: ruby:latest
+    steps:
+      - run: gem install dpl
+      - run: dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_CI_API_KEY
